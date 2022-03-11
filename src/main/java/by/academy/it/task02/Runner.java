@@ -37,5 +37,6 @@ public class Runner {
             }
         }
         System.out.println("Cписок деталей после удаления комплекта деталей для одного робота\n" + list);
+        System.out.println("Pull request from Lidia");
     }
 }
