@@ -1,16 +1,16 @@
-package main.java.by.academy.it.task02;
+package by.academy.it.task02;
 
-import main.java.by.academy.it.task02.entity.Robot;
-import main.java.by.academy.it.task02.entity.part.Body;
-import main.java.by.academy.it.task02.entity.part.CPU;
-import main.java.by.academy.it.task02.entity.part.HDD;
-import main.java.by.academy.it.task02.entity.part.Head;
-import main.java.by.academy.it.task02.entity.part.LeftHand;
-import main.java.by.academy.it.task02.entity.part.LeftLeg;
-import main.java.by.academy.it.task02.entity.part.RAM;
-import main.java.by.academy.it.task02.entity.part.RightHand;
-import main.java.by.academy.it.task02.entity.part.RightLeg;
-import main.java.by.academy.it.task02.entity.part.abstraction.Part;
+import by.academy.it.task02.entity.Robot;
+import by.academy.it.task02.entity.part.Body;
+import by.academy.it.task02.entity.part.CPU;
+import by.academy.it.task02.entity.part.HDD;
+import by.academy.it.task02.entity.part.Head;
+import by.academy.it.task02.entity.part.LeftHand;
+import by.academy.it.task02.entity.part.LeftLeg;
+import by.academy.it.task02.entity.part.RAM;
+import by.academy.it.task02.entity.part.RightHand;
+import by.academy.it.task02.entity.part.RightLeg;
+import by.academy.it.task02.entity.part.abstraction.Part;
 
 import java.util.ArrayList;
 import java.util.List;

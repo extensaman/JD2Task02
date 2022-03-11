@@ -1,6 +1,6 @@
-package main.java.by.academy.it.task02.entity.part;
+package by.academy.it.task02.entity.part;
 
-import main.java.by.academy.it.task02.entity.part.abstraction.Part;
+import by.academy.it.task02.entity.part.abstraction.Part;
 
 import java.util.Objects;
 
