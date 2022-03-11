@@ -15,14 +15,14 @@ import java.util.List;
 
 public class Robot {
     private final List<Part> parts = List.of(new Head(),
-            new Body(),
-            new RightHand(),
-            new LeftHand(),
-            new RightLeg(),
-            new LeftLeg(),
-            new CPU(),
-            new RAM(),
-            new HDD());
+                                        new Body(),
+                                        new RightHand(),
+                                        new LeftHand(),
+                                        new RightLeg(),
+                                        new LeftLeg(),
+                                        new CPU(),
+                                        new RAM(),
+                                        new HDD());
 
     public List<Part> getParts() {
         return parts;

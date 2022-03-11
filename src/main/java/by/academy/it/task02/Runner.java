@@ -17,17 +17,18 @@ import java.util.List;
 
 public class Runner {
     public static void main(String[] args) {
-        System.out.println("Pull-request from Aleksandr");
-        List<Part> list = new ArrayList<>(List.of(new Head(), new Head(),
-                new Body(), new Body(),
-                new LeftHand(),
-                new RightHand(),
-                new LeftLeg(), new LeftLeg(),
-                new RightLeg(),
-                new CPU(),
-                new RAM(),
-                new HDD()));
-
+  
+      System.out.println("Pull request from Aleksandr");
+      
+      List<Part> list = new ArrayList<Part>(List.of(new Head(), new Head(),
+                                                new Body(), new Body(),
+                                                new LeftHand(),
+                                                new RightHand(),
+                                                new LeftLeg(), new LeftLeg(),
+                                                new RightLeg(),
+                                                new CPU(),
+                                                new RAM(),
+                                                new HDD()));
         System.out.println("Первоначальный список деталей\n" + list);
         Robot robot = new Robot();
         if (list.containsAll(robot.getParts())) {
