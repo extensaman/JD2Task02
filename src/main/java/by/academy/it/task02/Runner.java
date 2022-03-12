@@ -11,6 +11,7 @@ import by.academy.it.task02.entity.part.RAM;
 import by.academy.it.task02.entity.part.RightHand;
 import by.academy.it.task02.entity.part.RightLeg;
 import by.academy.it.task02.entity.part.abstraction.Part;
+import by.academy.it.task02.logic.Simulator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,5 +39,7 @@ public class Runner {
         }
         System.out.println("Cписок деталей после удаления комплекта деталей для одного робота\n" + list);
         System.out.println("Pull request from Lidia");
+
+        Simulator.getInstance().execute();
     }
 }
