@@ -7,33 +7,35 @@ import by.academy.it.task02.utility.PartFabric;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
+import java.util.Queue;
 import java.util.Random;
-import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.concurrent.Callable;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Competition {
 
     public static final int INITIAL_PARTS_COUNT = 20;
-    private final ConcurrentLinkedQueue<Part> partQueue;
-    private final List<Part> robotPropotypeParts = new Robot().getParts();
+    private final Queue<Part> partsTrashHeap;
+    private final List<Part> robotPrototypeParts = new Robot().getParts();
+    private final ReentrantLock lock = new ReentrantLock();
     private final Random random = new Random();
 
     public Competition() {
         List<Part> initialParts = PartFabric.generateList(INITIAL_PARTS_COUNT);
-        this.partQueue = new ConcurrentLinkedQueue<>(initialParts);
-        System.out.println("Initial partQueue is " + partQueue);
+        this.partsTrashHeap = new LinkedList<>(initialParts);
+        System.out.println("Initial 'partsTrashHeap' is " + partsTrashHeap);
     }
 
     public final class MadScientist {
 
         private final List<Part> store;
         private final List<Robot> robots;
+        private final String name;
 
-        public MadScientist() {
+        public MadScientist(String name) {
             this.store = new LinkedList<>();
             this.robots = new ArrayList<>();
+            this.name = name;
         }
 
         public List<Part> getStore() {
@@ -45,15 +47,16 @@ public class Competition {
         }
 
         public void tryAssembleRobot() {
-            if (store.containsAll(robotPropotypeParts)) {
-                for (Part part : robotPropotypeParts) {
+            if (store.containsAll(robotPrototypeParts)) {
+                for (Part part : robotPrototypeParts) {
                     store.remove(part);
                 }
                 robots.add(new Robot());
+                System.out.println("!!! Minion of " + this.name + " has assembled robot #" + robots.size());
             }
         }
 
-        public final class Minion implements Runnable {
+        public final class Minion implements Callable<Void> {
             private final int partsConsumeBound;
 
             public Minion(int partsSampleBound) {
@@ -61,31 +64,46 @@ public class Competition {
             }
 
             @Override
-            public void run() {
-                List<Part> minionSample = Stream.generate(partQueue::poll)
+            public Void call() throws Exception{
+                lock.lock();
+                List<Part> minionSample = new ArrayList<>();
+                for (int i = 0; i < random.nextInt(partsConsumeBound) + 1; i++) {
+                    Part part = partsTrashHeap.poll();
+                    if (part != null) {
+                        minionSample.add(part);
+                    }
+
+                }
+                /*List<Part> minionSample = Stream.generate(partQueue::poll)
                         .filter(Objects::nonNull)
                         .limit(random.nextInt(partsConsumeBound) + 1)
-                        .collect(Collectors.toList());
-                System.out.println("Minion \'" + Thread.currentThread().getName() + "\' has taken next part's sample " + minionSample);
+                        .collect(Collectors.toList());*/
+                System.out.println("--- Minion of " + MadScientist.this.name + " has taken next part's sample " + minionSample);
                 MadScientist.this.store.addAll(minionSample);
+                System.out.println("His store is " + store);
+                lock.unlock();
+                return null;
             }
         }
     }
 
-    public final class Junkyard implements Runnable {
+    public final class TrashDumper implements Callable<Void> {
 
         private final int partsSupplyBound;
 
-        public Junkyard(int partsSupplyBound) {
+        public TrashDumper(int partsSupplyBound) {
             this.partsSupplyBound = partsSupplyBound;
         }
 
         @Override
-        public void run() {
+        public Void call() throws Exception{
+            lock.lock();
             List<Part> newPartList = PartFabric.generateList(random.nextInt(partsSupplyBound) + 1);
-            System.out.println(">>> PUT to Junkyard " + newPartList);
-            newPartList.forEach(partQueue::offer);
-            System.out.println("*** Junkyard *** is " + partQueue);
+            System.out.println(">>> DUMP next parts to Parts-Trash-Heap: " + newPartList);
+            newPartList.forEach(partsTrashHeap::offer);
+            System.out.println("*** Parts-Trash-Heap now: " + partsTrashHeap);
+            lock.unlock();
+            return null;
         }
 
     }
