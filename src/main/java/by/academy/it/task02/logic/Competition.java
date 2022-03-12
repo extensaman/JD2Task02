@@ -64,7 +64,7 @@ public class Competition {
             public void run() {
                 List<Part> minionSample = Stream.generate(partQueue::poll)
                         .filter(Objects::nonNull)
-                        .limit(random.nextInt(partsConsumeBound))
+                        .limit(random.nextInt(partsConsumeBound) + 1)
                         .collect(Collectors.toList());
                 System.out.println("Minion \'" + Thread.currentThread().getName() + "\' has taken next part's sample " + minionSample);
                 MadScientist.this.store.addAll(minionSample);
@@ -82,7 +82,7 @@ public class Competition {
 
         @Override
         public void run() {
-            List<Part> newPartList = PartFabric.generateList(random.nextInt(partsSupplyBound));
+            List<Part> newPartList = PartFabric.generateList(random.nextInt(partsSupplyBound) + 1);
             System.out.println(">>> PUT to Junkyard " + newPartList);
             newPartList.forEach(partQueue::offer);
             System.out.println("*** Junkyard *** is " + partQueue);
