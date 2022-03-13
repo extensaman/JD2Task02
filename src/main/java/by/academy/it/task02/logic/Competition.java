@@ -64,7 +64,7 @@ public class Competition {
             }
 
             @Override
-            public Void call() throws Exception{
+            public Void call() throws Exception {
                 lock.lock();
                 List<Part> minionSample = new ArrayList<>();
                 for (int i = 0; i < random.nextInt(partsConsumeBound) + 1; i++) {
@@ -74,10 +74,6 @@ public class Competition {
                     }
 
                 }
-                /*List<Part> minionSample = Stream.generate(partQueue::poll)
-                        .filter(Objects::nonNull)
-                        .limit(random.nextInt(partsConsumeBound) + 1)
-                        .collect(Collectors.toList());*/
                 System.out.println("--- Minion of " + MadScientist.this.name + " has taken next part's sample " + minionSample);
                 MadScientist.this.store.addAll(minionSample);
                 System.out.println("His store is " + store);
@@ -96,7 +92,7 @@ public class Competition {
         }
 
         @Override
-        public Void call() throws Exception{
+        public Void call() throws Exception {
             lock.lock();
             List<Part> newPartList = PartFabric.generateList(random.nextInt(partsSupplyBound) + 1);
             System.out.println(">>> DUMP next parts to Parts-Trash-Heap: " + newPartList);
