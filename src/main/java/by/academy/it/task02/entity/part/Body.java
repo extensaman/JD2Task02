@@ -5,7 +5,7 @@ import by.academy.it.task02.entity.part.abstraction.Part;
 import java.util.Objects;
 
 public class Body extends Part {
-    private final String name = "Name";
+    private final String name = "Body";
 
     @Override
     public boolean equals(Object o) {
