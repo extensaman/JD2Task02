@@ -14,7 +14,7 @@ import by.academy.it.task02.entity.part.Body;
 import java.util.List;
 
 public class Robot {
-    private final List<Part> parts = List.of(new Head(),
+    private static final List<Part> parts = List.of(new Head(),
                                         new Body(),
                                         new RightHand(),
                                         new LeftHand(),
@@ -24,7 +24,7 @@ public class Robot {
                                         new RAM(),
                                         new HDD());
 
-    public List<Part> getParts() {
+    public static List<Part> getParts() {
         return parts;
     }
 }
