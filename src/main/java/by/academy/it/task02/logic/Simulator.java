@@ -6,8 +6,6 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ThreadFactory;
 
 public class Simulator {
 
@@ -41,7 +39,7 @@ public class Simulator {
                         madScientistB.new Minion(PARTS_SAMPLE_BOUND));
 
         for (int i = 0; i < NIGHTS_COUNT; i++) {
-            System.out.println("___ NIGHT #" + (i+1) + " ______________________________________");
+            System.out.println("___ NIGHT #" + (i + 1) + " ______________________________________");
             List<Future<Void>> futures = null;
             try {
                 futures = service.invokeAll(callables);
@@ -51,7 +49,7 @@ public class Simulator {
                 return;
             }
 
-            while (futures.stream().filter(Future::isDone).count() < futures.size());
+            while (futures.stream().filter(Future::isDone).count() < futures.size()) ;
             madScientistA.tryAssembleRobot();
             madScientistB.tryAssembleRobot();
         }

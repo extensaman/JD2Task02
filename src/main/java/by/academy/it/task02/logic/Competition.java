@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Random;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Competition {
@@ -76,11 +75,11 @@ public class Competition {
                 }
                 MadScientist.this.store.addAll(minionSample);
                 System.out.println("--- Minion of " +
-                                MadScientist.this.name +
-                                    " has taken next part's sample " +
-                                        minionSample +
-                                            "\nHis store is " +
-                                                    store);
+                        MadScientist.this.name +
+                        " has taken next part's sample " +
+                        minionSample +
+                        "\nHis store is " +
+                        store);
                 lock.unlock();
                 return null;
             }
@@ -101,9 +100,9 @@ public class Competition {
             lock.lock();
             newPartList.forEach(partsTrashHeap::offer);
             System.out.println(">>> DUMP next parts to Parts-Trash-Heap: " +
-                                    newPartList +
-                                        "\n*** Parts-Trash-Heap now: " +
-                                            partsTrashHeap);
+                    newPartList +
+                    "\n*** Parts-Trash-Heap now: " +
+                    partsTrashHeap);
             lock.unlock();
             return null;
         }
