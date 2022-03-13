@@ -18,26 +18,8 @@ import java.util.List;
 
 public class Runner {
     public static void main(String[] args) {
-  
-      System.out.println("Pull request from Aleksandr");
-      
-      List<Part> list = new ArrayList<Part>(List.of(new Head(), new Head(),
-                                                new Body(), new Body(),
-                                                new LeftHand(),
-                                                new RightHand(),
-                                                new LeftLeg(), new LeftLeg(),
-                                                new RightLeg(),
-                                                new CPU(),
-                                                new RAM(),
-                                                new HDD()));
-        System.out.println("Первоначальный список деталей\n" + list);
-        Robot robot = new Robot();
-        if (list.containsAll(robot.getParts())) {
-            for (Part part : robot.getParts()) {
-                list.remove(part);
-            }
-        }
-        System.out.println("Cписок деталей после удаления комплекта деталей для одного робота\n" + list);
+
+        System.out.println("Pull request from Aleksandr");
         System.out.println("Pull request from Lidia");
 
         Simulator.getInstance().execute();

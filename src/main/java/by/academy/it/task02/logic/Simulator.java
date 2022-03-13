@@ -11,7 +11,6 @@ import java.util.concurrent.ThreadFactory;
 
 public class Simulator {
 
-    public static final int POOL_CAPACITY = 3;
     private static final Simulator INSTANCE = new Simulator();
     public static final int PARTS_SUPPLY_BOUND = 4;
     public static final int PARTS_SAMPLE_BOUND = 4;
@@ -34,7 +33,7 @@ public class Simulator {
         Competition.MadScientist madScientistA = competition.new MadScientist(SCIENTIST_A_NAME);
         Competition.MadScientist madScientistB = competition.new MadScientist(SCIENTIST_B_NAME);
 
-        ExecutorService service = Executors.newCachedThreadPool(); //Executors.newFixedThreadPool(POOL_CAPACITY);
+        ExecutorService service = Executors.newCachedThreadPool();
 
         Collection<Callable<Void>> callables =
                 List.of(competition.new TrashDumper(PARTS_SUPPLY_BOUND),

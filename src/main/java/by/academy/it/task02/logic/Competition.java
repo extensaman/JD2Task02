@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Random;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Competition {
@@ -65,18 +66,21 @@ public class Competition {
 
             @Override
             public Void call() throws Exception {
-                lock.lock();
                 List<Part> minionSample = new ArrayList<>();
+                lock.lock();
                 for (int i = 0; i < random.nextInt(partsConsumeBound) + 1; i++) {
                     Part part = partsTrashHeap.poll();
                     if (part != null) {
                         minionSample.add(part);
                     }
-
                 }
-                System.out.println("--- Minion of " + MadScientist.this.name + " has taken next part's sample " + minionSample);
                 MadScientist.this.store.addAll(minionSample);
-                System.out.println("His store is " + store);
+                System.out.println("--- Minion of " +
+                                MadScientist.this.name +
+                                    " has taken next part's sample " +
+                                        minionSample +
+                                            "\nHis store is " +
+                                                    store);
                 lock.unlock();
                 return null;
             }
@@ -93,11 +97,13 @@ public class Competition {
 
         @Override
         public Void call() throws Exception {
-            lock.lock();
             List<Part> newPartList = PartFabric.generateList(random.nextInt(partsSupplyBound) + 1);
-            System.out.println(">>> DUMP next parts to Parts-Trash-Heap: " + newPartList);
+            lock.lock();
             newPartList.forEach(partsTrashHeap::offer);
-            System.out.println("*** Parts-Trash-Heap now: " + partsTrashHeap);
+            System.out.println(">>> DUMP next parts to Parts-Trash-Heap: " +
+                                    newPartList +
+                                        "\n*** Parts-Trash-Heap now: " +
+                                            partsTrashHeap);
             lock.unlock();
             return null;
         }
